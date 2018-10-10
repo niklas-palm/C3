@@ -1,0 +1,35 @@
+#cloud-config
+
+apt_update: true
+apt_upgrade: true
+packages:
+ - cowsay
+ - python-pip
+ - python-dev
+ - build-essential
+ - rabbitmq-server
+byobu_default: system 
+
+write_files:
+  - path: /home/ubuntu/wordcount-app.py
+    content: |
+      from flask import Flask, jsonify
+      import subprocess
+      import sys
+      app = Flask(__name__)
+      @app.route('/wordcount/api/v1.0/go', methods=['GET'])
+      def wordcount-server():
+          #data=subprocess.check_output(["python","wordCount.py"])
+          data = 'heeey'
+	  return data
+      if __name__ == '__main__':
+          app.run(host='0.0.0.0',debug=True)
+
+runcmd:
+ - echo "export PATH=$PATH:/usr/games" >> /home/ubuntu/.bashrc 
+ - export PATH=$PATH:/usr/games
+ - source /home/ubuntu/.bashrc
+ - pip install Flask
+ - pip install celery
+ - celery -a multi start w1 -l info
+ - python home/ubuntu/wordcount-app.py 
