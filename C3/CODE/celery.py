@@ -6,7 +6,7 @@ from celery import Celery
 app = Celery('wordCount',
              broker='amqp://',
              backend='rpc://',
-             include=['code.tasks'])
+             include=['CODE.tasks'])
 
 # Optional configuration, see the application user guide.
 app.conf.update(

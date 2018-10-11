@@ -9,8 +9,8 @@ from .celery import app
 def wordCount():
 
     wantedWords = ['han', 'hon', 'hen', 'den', 'denna', 'denne']
-    #root = '/data/data/'
-    root = '/home/ubuntu/C3/data/'
+    root = '/data/data/'
+    #root = '/home/ubuntu/C3/data/'
     my_dict = {}
 
     for file in getFiles(root):
@@ -19,7 +19,7 @@ def wordCount():
             for line in f:
                 if (len(line) > 0 and not line == '\n'):
                     line = line.strip() #Remove trailing and starting spaces
-		    parsedTweet = json.loads(line)
+                    parsedTweet = json.loads(line)
                     if not (parsedTweet["retweeted"]):
 
                         words = cleanTweet(parsedTweet)
